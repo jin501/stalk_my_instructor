@@ -1,0 +1,6 @@
+#!/usr/bin/env ruby
+
+require './lib/stalk_my_instructor'
+
+StalkMyInstructor::CLI.new.call
+
