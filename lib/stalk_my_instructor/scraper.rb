@@ -13,8 +13,8 @@ class Scraper
 
     # page.forms[0].action #https://www.linkedin.com/uas/login-submit
     signin = page.form('login')
-    signin.session_key = 'soljin01@gmail.com'
-    signin.session_password = 'Ksj_0908'
+    signin.session_key = ''
+    signin.session_password = ''
     page = agent.submit(signin, signin.buttons[1])
 
     get_page = agent.get(url)
