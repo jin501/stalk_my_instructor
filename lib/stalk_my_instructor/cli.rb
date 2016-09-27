@@ -1,7 +1,7 @@
 require_relative 'webcam'
 require_relative 'scraper'
 
-class StalkMyInstructor::CLI
+class CLI
 
   def call
     # @session = StalkMyInstructor::Scraper.new
@@ -49,8 +49,7 @@ class StalkMyInstructor::CLI
     case input
       when "1"
         start_webcam
-        
-
+        stalk_menu
       when "menu"
         main_menu
       when "2"
@@ -87,19 +86,27 @@ class StalkMyInstructor::CLI
   end
 
   def start_webcam
-    webcam
+    take_pic
     mock_scan
-    profile_match
+    stalk_menu
+  end
+
+  def take_pic
+    puts ""
+    puts "hit 'space' to take a snap"
+    puts ""
+    puts "type 'q' to quit camera"
+    puts ""
+    puts ""
+    OurWebcam.new.webcam
   end
 
   def mock_scan
     system "clear"
-    puts ""
-    puts "type 'q' to quit"
-    puts ""
     sleep(1)
     puts "...scanning picture"
     sleep(2)
+    puts ""
     puts "using facial recognition intelligence to match profile..."
     sleep(2)
     puts ""
@@ -107,22 +114,31 @@ class StalkMyInstructor::CLI
   end
 
   def profile_match
-    #confidence level
-    # if confidence < 75
-      #Iterate through the instructor hash, and find a 
+    OurWebcam.new.get_url
   end
 
-  def stalk_menu(arg)
+  def stalk_menu
+    url = profile_match
+    instructor = Scraper.new.new_session(url)
     system "clear"
     puts "We found 1 match!"
-    # puts "Name: #{@session.fname} #{@session.lname}"
-    # puts "Email Address: #{@session.email}"
-    # puts "Company: #{@sessions.job_title}"
+    puts ""
+    puts "Name: #{instructor[:name]}"
+    puts "has #{instructor[:connections]} people"
+    puts "Address: #{instructor[:home_location]}"
+    puts "Title: | location of work | #{instructor[:industry]}"
+    puts "Current job: "
     puts "Education: "
-    puts "Experience: "
+    puts "Interests: "
+    puts "Previous Experience: "
+    puts "Skills: "
+    puts " "
     puts " "
     puts "   ----- ------ -----   "
+    puts ""
     bottom_menu
   end
 
 end
+
+CLI.new.stalk_menu

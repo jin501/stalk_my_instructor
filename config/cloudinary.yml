@@ -1,0 +1,18 @@
+development:
+  cloud_name: ns5001
+  api_key: '461615759643694'
+  api_secret: 5KpvR6pIXA9euaRcFYt7gmRdSkc
+  enhance_image_tag: true
+  static_image_support: false
+production:
+  cloud_name: ns5001
+  api_key: '461615759643694'
+  api_secret: 5KpvR6pIXA9euaRcFYt7gmRdSkc
+  enhance_image_tag: true
+  static_image_support: true
+test:
+  cloud_name: ns5001
+  api_key: '461615759643694'
+  api_secret: 5KpvR6pIXA9euaRcFYt7gmRdSkc
+  enhance_image_tag: true
+  static_image_support: false

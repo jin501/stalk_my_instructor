@@ -3,6 +3,7 @@ require 'nokogiri'
 require 'pry'
 require 'net/http'
 require 'mechanize'
+require_relative 'webcam'
 
 class Scraper
 
@@ -12,8 +13,8 @@ class Scraper
 
     # page.forms[0].action #https://www.linkedin.com/uas/login-submit
     signin = page.form('login')
-    signin.session_key = '.com'
-    signin.session_password = ''
+    signin.session_key = 'soljin01@gmail.com'
+    signin.session_password = 'Ksj_0908'
     page = agent.submit(signin, signin.buttons[1])
 
     get_page = agent.get(url)
@@ -119,8 +120,7 @@ class Scraper
         get_page.search('div#background-volunteering div.non-profits li').each do |org|
           profile_hash[:organizations_supported] << org.text
         end
-
-    binding.pry
+      profile_hash
     end
 
 
@@ -135,14 +135,14 @@ class Scraper
         master_exp_hash["experience#{c}".to_sym] = blob.text
         c+=1
 
-        binding.pry
+
       end
     end
 
 end
 
 
-url = "https://www.linkedin.com/in/ruchiramani"
+url = OurWebcam.new.get_url
 
 Scraper.new.new_session(url)
 
